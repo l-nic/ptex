@@ -124,13 +124,13 @@ private:
 
 class Mutex {
 public:
-    Mutex()      { pthread_mutex_init(&_mutex, 0); }
-    ~Mutex()     { pthread_mutex_destroy(&_mutex); }
-    void lock()   { pthread_mutex_lock(&_mutex); }
-    bool trylock() { return 0 == pthread_mutex_trylock(&_mutex); }
-    void unlock() { pthread_mutex_unlock(&_mutex); }
+    Mutex()      { /*pthread_mutex_init(&_mutex, 0);*/ }
+    ~Mutex()     { /*pthread_mutex_destroy(&_mutex);*/ }
+    void lock()   { /*pthread_mutex_lock(&_mutex);*/ }
+    bool trylock() { return true; /*return 0 == pthread_mutex_trylock(&_mutex);*/ }
+    void unlock() { /*pthread_mutex_unlock(&_mutex);*/ }
 private:
-    pthread_mutex_t _mutex;
+    // pthread_mutex_t _mutex;
 };
 
 #ifdef __APPLE__
@@ -147,13 +147,13 @@ private:
 #else
 class SpinLock {
 public:
-    SpinLock()   { pthread_spin_init(&_spinlock, PTHREAD_PROCESS_PRIVATE); }
-    ~SpinLock()  { pthread_spin_destroy(&_spinlock); }
-    void lock()   { pthread_spin_lock(&_spinlock); }
-    bool trylock() { return 0 == pthread_spin_trylock(&_spinlock); }
-    void unlock() { pthread_spin_unlock(&_spinlock); }
+    SpinLock()   { /*pthread_spin_init(&_spinlock, PTHREAD_PROCESS_PRIVATE);*/ }
+    ~SpinLock()  { /*pthread_spin_destroy(&_spinlock);*/ }
+    void lock()   { /*pthread_spin_lock(&_spinlock);*/ }
+    bool trylock() { return true; /*return 0 == pthread_spin_trylock(&_spinlock);*/ }
+    void unlock() { /*pthread_spin_unlock(&_spinlock);*/ }
 private:
-    pthread_spinlock_t _spinlock;
+    // pthread_spinlock_t _spinlock;
 };
 #endif // __APPLE__
 #endif
